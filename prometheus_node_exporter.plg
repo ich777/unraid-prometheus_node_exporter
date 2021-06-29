@@ -3,17 +3,20 @@
   <!ENTITY name      "prometheus_node_exporter">
   <!ENTITY author    "ich777">
   <!ENTITY version   "2021.06.29">
-  <!ENTITY launch    "Settings/node_exporter">
   <!ENTITY gitURL    "https://github.com/&author;/unraid-&name;/raw/master">
   <!ENTITY pluginURL "&gitURL;/&name;.plg">
-  <!ENTITY md5       "02dda6fc2b1867d4780475b3ef010365">
+  <!ENTITY md5       "3a8df95a494781ab76f26931fe67c89f">
   <!ENTITY plugin    "/boot/config/plugins/&name;">
   <!ENTITY emhttp    "/usr/local/emhttp/plugins/&name;">
 ]>
 
-<PLUGIN  name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.9.0" support="https://forums.unraid.net/topic/92865-support-ich777-nvidiadvbzfsiscsimft-kernel-helperbuilder-docker/">
+<PLUGIN  name="&name;" author="&author;" version="&version;" pluginURL="&pluginURL;" min="6.9.0" support="https://forums.unraid.net/topic/92865-support-ich777-nvidiadvbzfsiscsimft-kernel-helperbuilder-docker/">
 
 <CHANGES>
+
+###2021.06.29a
+- Added icon
+- Removed settings page
 
 ###2021.06.29
 - Initial release - based on version v1.1.2
