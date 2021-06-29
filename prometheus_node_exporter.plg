@@ -36,7 +36,7 @@ rm -f $(ls /boot/config/plugins/&name;/&name;*.tgz 2>/dev/null|grep -v '&version
 **Prometheus Node Exporter**
 
 Is a slim plugin, that takes informations form your System and provides it to a Prometheus database. Usage is not limited to Prometheus only. Data can be formated and displayed to any database or graphical node.  
-Export URL: The URL for the exportet metrics is: 'http://YOURunRAIDIP:9700/metrics' (to use it in Prometheus add the target: 'YOURunRAIDIP:9700' to your Prometheus yaml).  
+Export URL: The URL for the exportet metrics is: 'http://YOURunRAIDIP:9100/metrics' (to use it in Prometheus add the target: 'YOURunRAIDIP:9100' to your Prometheus yaml).  
 This Plugin is based on node_exporter: https://github.com/prometheus/node_exporter
 </INLINE>
 </FILE>
