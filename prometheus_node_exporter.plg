@@ -50,11 +50,12 @@ if [ ! -f "&plugin;/settings.cfg" ]; then
 fi
 
 if [ -z "$(pidof prometheus_node_exporter)" ]; then
+  START_PARAMS="$(cat &plugin;/settings.cfg | cut -d '=' -f2-)"
   echo "-------------Starting Prometheus Node Exporter!--------------"
-  if [ -z "$(cat &plugin;/settings.cfg | cut -d '=' -f2-)" ]; then
-    /usr/bin/prometheus_node_exporter
+  if [ -z "$START_PARAMS" ]; then
+    echo "/usr/bin/prometheus_node_exporter" | at now
   else
-    /usr/bin/prometheus_node_exporter "$(cat &plugin;/settings.cfg | cut -d '=' -f2-)"
+    echo "/usr/bin/prometheus_node_exporter "$START_PARAMS"" | at now
   fi
 else
   echo
