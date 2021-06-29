@@ -1,0 +1,86 @@
+<?xml version='1.0' standalone='yes'?>
+<!DOCTYPE PLUGIN [
+  <!ENTITY name      "prometheus_node_exporter">
+  <!ENTITY author    "ich777">
+  <!ENTITY version   "2021.06.29">
+  <!ENTITY launch    "Settings/node_exporter">
+  <!ENTITY gitURL    "https://github.com/&author;/unraid-&name;/raw/master">
+  <!ENTITY pluginURL "&gitURL;/&name;.plg">
+  <!ENTITY md5       "02dda6fc2b1867d4780475b3ef010365">
+  <!ENTITY plugin    "/boot/config/plugins/&name;">
+  <!ENTITY emhttp    "/usr/local/emhttp/plugins/&name;">
+]>
+
+<PLUGIN  name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.9.0" support="https://forums.unraid.net/topic/92865-support-ich777-nvidiadvbzfsiscsimft-kernel-helperbuilder-docker/">
+
+<CHANGES>
+
+###2021.06.29
+- Initial release - based on version v1.1.2
+
+</CHANGES>
+
+<FILE Run="/bin/bash">
+<INLINE>
+rm -f $(ls /boot/config/plugins/&name;/&name;*.tgz 2>/dev/null|grep -v '&version;')
+</INLINE>
+</FILE>
+
+<FILE Name="/boot/config/plugins/&name;/&name;-&version;.tgz" Run="upgradepkg --install-new">
+<URL>&gitURL;/packages/&name;-&version;.tgz</URL>
+<MD5>&md5;</MD5>
+</FILE>
+
+<FILE Name="&emhttp;/README.md">
+<INLINE>
+**Prometheus Node Exporter**
+
+Is a slim plugin, that takes informations form your System and provides it to a Prometheus database. Usage is not limited to Prometheus only. Data can be formated and displayed to any database or graphical node.  
+Export URL: The URL for the exportet metrics is: 'http://YOURunRAIDIP:9700/metrics' (to use it in Prometheus add the target: 'YOURunRAIDIP:9700' to your Prometheus yaml).  
+This Plugin is based on node_exporter: https://github.com/prometheus/node_exporter
+</INLINE>
+</FILE>
+
+<FILE Run="/bin/bash">
+<INLINE>
+
+#Create settings file if not found
+if [ ! -f "&plugin;/settings.cfg" ]; then
+  echo 'start_parameters=' > "&plugin;/settings.cfg"
+fi
+
+if [ -z "$(pidof prometheus_node_exporter)" ]; then
+  echo "-------------Starting Prometheus Node Exporter!--------------"
+  if [ -z "$(cat &plugin;/settings.cfg | cut -d '=' -f2-)" ]; then
+    /usr/bin/prometheus_node_exporter
+  else
+    /usr/bin/prometheus_node_exporter "$(cat &plugin;/settings.cfg | cut -d '=' -f2-)"
+  fi
+else
+  echo
+  echo "---Nothing to do, Prometheus Node Exporter already started---"
+fi
+
+</INLINE>
+</FILE>
+
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+
+echo "-------------------------------------------"
+echo "---Uninstalling prometheus_node_exporter---"
+echo "-------------------------------------------"
+# Remove plugin related files
+kill $(pidof prometheus_node_exporter) 2>/dev/null
+removepkg &name;-&version;
+rm -rf /usr/local/emhttp/plugins/&name;
+rm -rf &plugin;
+echo
+echo "----------------------------------------------------------"
+echo "---Uninstallation of prometheus_node_exporter complete!---"
+echo "----------------------------------------------------------"
+echo
+
+</INLINE>
+</FILE>
+</PLUGIN>
