@@ -2,7 +2,7 @@
 <!DOCTYPE PLUGIN [
   <!ENTITY name      "prometheus_node_exporter">
   <!ENTITY author    "ich777">
-  <!ENTITY version   "2021.06.29">
+  <!ENTITY version   "2021.06.29a">
   <!ENTITY gitURL    "https://github.com/&author;/unraid-&name;/raw/master">
   <!ENTITY pluginURL "&gitURL;/&name;.plg">
   <!ENTITY md5       "3a8df95a494781ab76f26931fe67c89f">
