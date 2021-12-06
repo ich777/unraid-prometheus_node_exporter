@@ -2,10 +2,10 @@
 <!DOCTYPE PLUGIN [
   <!ENTITY name      "prometheus_node_exporter">
   <!ENTITY author    "ich777">
-  <!ENTITY version   "2021.11.18">
+  <!ENTITY version   "2021.12.05">
   <!ENTITY gitURL    "https://github.com/&author;/unraid-&name;/raw/master">
   <!ENTITY pluginURL "&gitURL;/&name;.plg">
-  <!ENTITY md5       "75a7241e0253b426696b1b6e2a6bb72f">
+  <!ENTITY md5       "ab1f5a819242d2855575b881e3c764b8">
   <!ENTITY plugin    "/boot/config/plugins/&name;">
   <!ENTITY emhttp    "/usr/local/emhttp/plugins/&name;">
 ]>
@@ -13,6 +13,9 @@
 <PLUGIN  name="&name;" author="&author;" version="&version;" pluginURL="&pluginURL;" min="6.9.0" support="https://forums.unraid.net/topic/110995-plugin-prometheus-unraid-plugins/">
 
 <CHANGES>
+
+###2021.12.05
+- Bumped version - based on node exporter v1.3.1
 
 ###2021.11.18
 - Bumped version - based on node exporter v1.3.0
